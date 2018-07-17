@@ -19,9 +19,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var mtlView: UIView!
     
     let vertexData:[Float] = [
-        0.0,  1.0, 0.0,
         -1.0, -1.0, 0.0,
-        1.0, -1.0, 0.0]
+        1.0, -1.0, 0.0,
+        -1.0,  1.0, 0.0,
+        1.0,  1.0, 0.0 ]
     
     var vertexBuffer: MTLBuffer!
     var timeBuffer: MTLBuffer!
@@ -85,7 +86,7 @@ class ViewController: UIViewController {
         renderEncoder?.setRenderPipelineState(pipelineState)
         renderEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         renderEncoder?.setFragmentBuffer(timeBuffer, offset: 0, index: 0)
-        renderEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3, instanceCount: 1)
+        renderEncoder?.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4, instanceCount: 1)
         renderEncoder?.endEncoding()
         
         commandBuffer?.present(drawable)
