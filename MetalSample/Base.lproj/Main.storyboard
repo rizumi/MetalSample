@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-823" y="33"/>
         </scene>
-        <!--View Controller-->
+        <!--MetalSamples-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MetalSample" customModuleProvider="target" sceneMemberID="viewController">
@@ -58,7 +58,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3Ep-jh-rbs"/>
+                    <navigationItem key="navigationItem" title="MetalSamples" id="3Ep-jh-rbs"/>
                     <connections>
                         <outlet property="tableView" destination="ZKl-3q-Zrn" id="Cq9-NO-SJL"/>
                     </connections>
