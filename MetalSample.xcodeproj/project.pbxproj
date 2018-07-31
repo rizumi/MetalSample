@@ -19,6 +19,9 @@
 		FD337BBF21048923002C7D4B /* UniformShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = FD337BBE21048923002C7D4B /* UniformShaders.metal */; };
 		FD337BC12104892E002C7D4B /* Uniform.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD337BC02104892E002C7D4B /* Uniform.storyboard */; };
 		FD337BC32104893A002C7D4B /* UniformViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD337BC22104893A002C7D4B /* UniformViewController.swift */; };
+		FDA6448621106D3200415E69 /* FrameBufferObjectShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = FDA6448521106D3200415E69 /* FrameBufferObjectShaders.metal */; };
+		FDA6448821106D3F00415E69 /* FrameBufferObject.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDA6448721106D3F00415E69 /* FrameBufferObject.storyboard */; };
+		FDA6448A21106D5100415E69 /* FrameBufferObjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA6448921106D5100415E69 /* FrameBufferObjectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		FD337BBE21048923002C7D4B /* UniformShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = UniformShaders.metal; sourceTree = "<group>"; };
 		FD337BC02104892E002C7D4B /* Uniform.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Uniform.storyboard; sourceTree = "<group>"; };
 		FD337BC22104893A002C7D4B /* UniformViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniformViewController.swift; sourceTree = "<group>"; };
+		FDA6448521106D3200415E69 /* FrameBufferObjectShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = FrameBufferObjectShaders.metal; sourceTree = "<group>"; };
+		FDA6448721106D3F00415E69 /* FrameBufferObject.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FrameBufferObject.storyboard; sourceTree = "<group>"; };
+		FDA6448921106D5100415E69 /* FrameBufferObjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameBufferObjectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,7 @@
 		FD337BA021046770002C7D4B /* MetalSample */ = {
 			isa = PBXGroup;
 			children = (
+				FDA6448421106CED00415E69 /* FrameBufferObject */,
 				FD337BBD21048913002C7D4B /* Uniform */,
 				FD337BB521047A6D002C7D4B /* Triangle */,
 				FD337BA121046770002C7D4B /* AppDelegate.swift */,
@@ -99,6 +106,16 @@
 				FD337BC22104893A002C7D4B /* UniformViewController.swift */,
 			);
 			path = Uniform;
+			sourceTree = "<group>";
+		};
+		FDA6448421106CED00415E69 /* FrameBufferObject */ = {
+			isa = PBXGroup;
+			children = (
+				FDA6448521106D3200415E69 /* FrameBufferObjectShaders.metal */,
+				FDA6448721106D3F00415E69 /* FrameBufferObject.storyboard */,
+				FDA6448921106D5100415E69 /* FrameBufferObjectViewController.swift */,
+			);
+			path = FrameBufferObject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD337BB721047A8B002C7D4B /* Triangle.storyboard in Resources */,
+				FDA6448821106D3F00415E69 /* FrameBufferObject.storyboard in Resources */,
 				FD337BC12104892E002C7D4B /* Uniform.storyboard in Resources */,
 				FD337BAC21046772002C7D4B /* LaunchScreen.storyboard in Resources */,
 				FD337BA921046772002C7D4B /* Assets.xcassets in Resources */,
@@ -179,8 +197,10 @@
 				FD337BBA21047B49002C7D4B /* TriangleViewController.swift in Sources */,
 				FD337BB42104795D002C7D4B /* DataSource.swift in Sources */,
 				FD337BA421046770002C7D4B /* ViewController.swift in Sources */,
+				FDA6448621106D3200415E69 /* FrameBufferObjectShaders.metal in Sources */,
 				FD337BA221046770002C7D4B /* AppDelegate.swift in Sources */,
 				FD337BC32104893A002C7D4B /* UniformViewController.swift in Sources */,
+				FDA6448A21106D5100415E69 /* FrameBufferObjectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,7 +345,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9D5G5CKU6B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MetalSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -343,7 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9D5G5CKU6B;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MetalSample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

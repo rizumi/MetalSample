@@ -32,6 +32,8 @@ struct DataSource {
     lazy var examples: [Example] = [Example(title: "Triangle",
                                             storyboardName: "Triangle"),
                                     Example(title: "Uniform",
-                                            storyboardName: "Uniform")
+                                            storyboardName: "Uniform"),
+                                    Example(title: "FrameBufferObject",
+                                            storyboardName: "FrameBufferObject")
                                    ]
 }
