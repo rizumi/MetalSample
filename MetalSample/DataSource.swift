@@ -34,6 +34,8 @@ struct DataSource {
                                     Example(title: "Uniform",
                                             storyboardName: "Uniform"),
                                     Example(title: "FrameBufferObject",
-                                            storyboardName: "FrameBufferObject")
+                                            storyboardName: "FrameBufferObject"),
+                                    Example(title: "Scissor",
+                                            storyboardName: "Scissor")
                                    ]
 }
