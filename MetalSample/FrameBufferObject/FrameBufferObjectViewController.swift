@@ -51,47 +51,12 @@ class FrameBufferObjectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        device = MTLCreateSystemDefaultDevice()
+        setup()
         
-        metalLayer = CAMetalLayer()
-        metalLayer.device = device
-        metalLayer.pixelFormat = .bgra8Unorm
-        metalLayer.framebufferOnly = true
-        mtlView.layer.addSublayer(metalLayer)
-
-        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
-        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
-
-        let dataSizeFbo = vertexDataFbo.count * MemoryLayout.size(ofValue: vertexDataFbo[0])
-        vertexBufferFbo = device.makeBuffer(bytes: vertexDataFbo, length: dataSizeFbo, options: [])
-
-        let dataSizeTexcoords = texCoords.count * MemoryLayout.size(ofValue: texCoords[0])
-        texCoordsBuffer = device.makeBuffer(bytes: texCoords, length: dataSizeTexcoords, options: [])
-
-        let defaultLibrary = device.makeDefaultLibrary()!
-        let fragmentProgram = defaultLibrary.makeFunction(name: "framebufferobject_fragment")
-        let vertexProgram = defaultLibrary.makeFunction(name: "framebufferobject_vertex")
-
-        let fragmentProgramFbo = defaultLibrary.makeFunction(name: "framebufferobject_fragment_fbo")
-        let vertexProgramFbo = defaultLibrary.makeFunction(name: "framebufferobject_vertex_fbo")
+        makeBuffers()
         
-        let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
-        pipelineStateDescriptor.vertexFunction = vertexProgram
-        pipelineStateDescriptor.fragmentFunction = fragmentProgram
-        pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
-        
-        pipelineState = try! device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+        makeRenderPipelineStates()
 
-        let pipelineStateDescriptorFbo = MTLRenderPipelineDescriptor()
-        pipelineStateDescriptorFbo.vertexFunction = vertexProgramFbo
-        pipelineStateDescriptorFbo.fragmentFunction = fragmentProgramFbo
-        pipelineStateDescriptorFbo.sampleCount = 4
-        pipelineStateDescriptorFbo.colorAttachments[0].pixelFormat = .bgra8Unorm
-
-        pipelineStateFbo = try! device.makeRenderPipelineState(descriptor: pipelineStateDescriptorFbo)
-        
-        commandQueue = device.makeCommandQueue()
-        
         createTextures()
         
         timer = CADisplayLink(target: self, selector: #selector(UniformViewController.loop))
@@ -103,7 +68,54 @@ class FrameBufferObjectViewController: UIViewController {
         metalLayer.frame = CGRect(x: 0.0, y: 0.0, width: mtlView.frame.width, height: mtlView.frame.height)
     }
     
-    func createTextures(){
+    private func setup(){
+        device = MTLCreateSystemDefaultDevice()
+        
+        metalLayer = CAMetalLayer()
+        metalLayer.device = device
+        metalLayer.pixelFormat = .bgra8Unorm
+        metalLayer.framebufferOnly = true
+        mtlView.layer.addSublayer(metalLayer)
+        
+        commandQueue = device.makeCommandQueue()
+    }
+    
+    private func makeBuffers(){
+        let dataSize = vertexData.count * MemoryLayout.size(ofValue: vertexData[0])
+        vertexBuffer = device.makeBuffer(bytes: vertexData, length: dataSize, options: [])
+        
+        let dataSizeFbo = vertexDataFbo.count * MemoryLayout.size(ofValue: vertexDataFbo[0])
+        vertexBufferFbo = device.makeBuffer(bytes: vertexDataFbo, length: dataSizeFbo, options: [])
+        
+        let dataSizeTexcoords = texCoords.count * MemoryLayout.size(ofValue: texCoords[0])
+        texCoordsBuffer = device.makeBuffer(bytes: texCoords, length: dataSizeTexcoords, options: [])
+    }
+    
+    private func makeRenderPipelineStates(){
+        let defaultLibrary = device.makeDefaultLibrary()!
+        let fragmentProgram = defaultLibrary.makeFunction(name: "framebufferobject_fragment")
+        let vertexProgram = defaultLibrary.makeFunction(name: "framebufferobject_vertex")
+        
+        let fragmentProgramFbo = defaultLibrary.makeFunction(name: "framebufferobject_fragment_fbo")
+        let vertexProgramFbo = defaultLibrary.makeFunction(name: "framebufferobject_vertex_fbo")
+        
+        let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
+        pipelineStateDescriptor.vertexFunction = vertexProgram
+        pipelineStateDescriptor.fragmentFunction = fragmentProgram
+        pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
+        
+        pipelineState = try! device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+        
+        let pipelineStateDescriptorFbo = MTLRenderPipelineDescriptor()
+        pipelineStateDescriptorFbo.vertexFunction = vertexProgramFbo
+        pipelineStateDescriptorFbo.fragmentFunction = fragmentProgramFbo
+        pipelineStateDescriptorFbo.sampleCount = 4
+        pipelineStateDescriptorFbo.colorAttachments[0].pixelFormat = .bgra8Unorm
+        
+        pipelineStateFbo = try! device.makeRenderPipelineState(descriptor: pipelineStateDescriptorFbo)
+    }
+    
+    private func createTextures(){
         let mtlTextureDescriptor = MTLTextureDescriptor()
         mtlTextureDescriptor.pixelFormat = .bgra8Unorm
         mtlTextureDescriptor.width = 256
